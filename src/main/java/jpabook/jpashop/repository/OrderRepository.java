@@ -2,6 +2,7 @@ package jpabook.jpashop.repository;
 
 import jpabook.jpashop.domain.Order;
 
+import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -101,15 +102,6 @@ public class OrderRepository {
         return query.getResultList();
     }
 
-    public List<Order> findAllWithMemberDelivery() {
-        // fetch join.
-        return em.createQuery(
-                "select o from Order o" +
-                        " join fetch o.member m" +
-                        " join fetch o.delivery d", Order.class)
-            .getResultList();
-    }
-
     public List<Order> findAllWithItem() {
         return em.createQuery(
                 "select distinct o from Order o" +
@@ -128,6 +120,15 @@ public class OrderRepository {
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList();
+    }
+
+    // 재사용성이 높음. 성능이 살짝 떨어짐
+    public List<Order> findAllWithMemberDelivery() {
+        return em.createQuery(
+                "select o from Order o" +
+                    " join fetch o.member m" +
+                    " join fetch o.delivery d", Order.class)
+            .getResultList();
     }
 }
 

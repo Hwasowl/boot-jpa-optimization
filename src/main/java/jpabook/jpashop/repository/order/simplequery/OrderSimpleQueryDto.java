@@ -11,7 +11,7 @@ public class OrderSimpleQueryDto {
 
     private Long orderId;
     private String name;
-    private LocalDateTime orderDate; //주문시간
+    private LocalDateTime orderDate;
     private OrderStatus orderStatus;
     private Address address;
 
