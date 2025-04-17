@@ -18,11 +18,12 @@ import static javax.persistence.FetchType.*;
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
-
+    // 양방향 연관 관계 일 때에는 한 쪽에 JsonIgnore 처리를 해줘야 한다.
     @Id @GeneratedValue
     @Column(name = "order_id")
     private Long id;
 
+    // Fetch Lazy 면 하이버네이트가 프록시 객체를 생성한다. new ProxyMember() - 바이트버디.
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
