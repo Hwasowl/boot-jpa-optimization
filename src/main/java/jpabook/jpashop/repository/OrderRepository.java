@@ -103,6 +103,7 @@ public class OrderRepository {
     }
 
     public List<Order> findAllWithItem() {
+        // 일대다를 패치 조인할 떄에는 페이징이 불가능하다.
         return em.createQuery(
                 "select distinct o from Order o" +
                         " join fetch o.member m" +
