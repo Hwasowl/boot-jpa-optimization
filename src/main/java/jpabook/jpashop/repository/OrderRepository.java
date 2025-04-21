@@ -113,6 +113,7 @@ public class OrderRepository {
                 .getResultList();
     }
 
+    // 페이지네이션 toOne fetch join
     public List<Order> findAllWithMemberDelivery(int offset, int limit) {
         return em.createQuery(
                 "select o from Order o" +
